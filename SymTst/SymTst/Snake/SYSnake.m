@@ -65,31 +65,41 @@
     [self die];
 }
 - (void)eat {
+    SYSnakeBodyPoint *newPoint = [[SYSnakeBodyPoint alloc]init];
+    SYSnakeBodyPoint *snakeHead = [self.body firstObject];
     switch (self.direction) {
         case SnakeDirectionLeft:
         {
-            
+            newPoint.x = snakeHead.x;
+            newPoint.y = snakeHead.y - 1;
         }
             break;
         case SnakeDirectionRight:
         {
-            
+            newPoint.x = snakeHead.x;
+            newPoint.y = snakeHead.y - 1;
         }
             break;
         case SnakeDirectionTop:
         {
-            
+            newPoint.x = snakeHead.x;
+            newPoint.y = snakeHead.y - 1;
         }
             break;
         case SnakeDirectionBottom:
         {
-            
+            newPoint.x = snakeHead.x;
+            newPoint.y = snakeHead.y - 1;
         }
             break;
             
         default:
             break;
     }
+    /**
+     *  吃下食物
+     */
+    [self.body addObject:newPoint];
 }
 
 - (BOOL)die{
