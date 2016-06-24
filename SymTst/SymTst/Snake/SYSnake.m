@@ -103,10 +103,12 @@
 }
 
 - (BOOL)die{
-    /**
-     *  TODO
-     */
-    return YES;
+    SYSnakeBodyPoint *snakeHead = [self.body firstObject];
+    NSArray * snakeBody = [self.body subarrayWithRange:NSMakeRange(1, self.body.count - 1)];
+    if ([snakeBody containsObject:snakeHead]) {
+        return YES;
+    }
+    return NO;
 }
 
 
