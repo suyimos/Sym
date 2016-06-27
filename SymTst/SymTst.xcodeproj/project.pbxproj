@@ -18,6 +18,7 @@
 		E2B6833E1D1A512C00D21646 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B6833C1D1A512C00D21646 /* LaunchScreen.storyboard */; };
 		E2B683491D1A512C00D21646 /* SymTstTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B683481D1A512C00D21646 /* SymTstTests.m */; };
 		E2B683541D1A512C00D21646 /* SymTstUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E2B683531D1A512C00D21646 /* SymTstUITests.m */; };
+		E2DF063D1D20C55100BA9DB3 /* SnakeMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2DF063C1D20C55100BA9DB3 /* SnakeMapView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		E2B6834F1D1A512C00D21646 /* SymTstUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SymTstUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2B683531D1A512C00D21646 /* SymTstUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SymTstUITests.m; sourceTree = "<group>"; };
 		E2B683551D1A512C00D21646 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2DF063B1D20C55100BA9DB3 /* SnakeMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnakeMapView.h; sourceTree = "<group>"; };
+		E2DF063C1D20C55100BA9DB3 /* SnakeMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnakeMapView.m; sourceTree = "<group>"; };
 		FC6D8382737AAB750D548F9F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +114,8 @@
 			children = (
 				E29AC35C1D1CD85D004B6188 /* SYSnakeViewController.h */,
 				E29AC35D1D1CD85D004B6188 /* SYSnakeViewController.m */,
+				E2DF063B1D20C55100BA9DB3 /* SnakeMapView.h */,
+				E2DF063C1D20C55100BA9DB3 /* SnakeMapView.m */,
 				E29AC35F1D1CEF74004B6188 /* SYSnake.h */,
 				E29AC3601D1CEF74004B6188 /* SYSnake.m */,
 			);
@@ -364,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2DF063D1D20C55100BA9DB3 /* SnakeMapView.m in Sources */,
 				E2B683361D1A512C00D21646 /* ViewController.m in Sources */,
 				E2B683331D1A512C00D21646 /* AppDelegate.m in Sources */,
 				E2B683301D1A512C00D21646 /* main.m in Sources */,
