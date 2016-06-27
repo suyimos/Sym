@@ -17,40 +17,13 @@
     return self;
 }
 
-- (void)forward:(SnakeDirection)direction {
-    SYSnakeBodyPoint *newPoint = [[SYSnakeBodyPoint alloc]init];
+- (void)forward {
+    SYSnakeBodyPoint *newPoint = [self nextFood];
     SYSnakeBodyPoint *snakeHead = [self.body firstObject];
     
     
-    switch (self.direction) {
-        case SnakeDirectionLeft:
-        {
-            newPoint.x = snakeHead.x - 1;
-            newPoint.y = snakeHead.y;
-        }
-            break;
-        case SnakeDirectionRight:
-        {
-            newPoint.x = snakeHead.x + 1;
-            newPoint.y = snakeHead.y;
-        }
-            break;
-        case SnakeDirectionTop:
-        {
-            newPoint.x = snakeHead.x;
-            newPoint.y = snakeHead.y - 1;
-        }
-            break;
-        case SnakeDirectionBottom:
-        {
-            newPoint.x = snakeHead.x;
-            newPoint.y = snakeHead.y + 1;
-        }
-            break;
-            
-        default:
-            break;
-    }
+
+
     /**
      *  前进了一个点
      */
@@ -64,9 +37,31 @@
      */
     [self die];
 }
-- (void)eat {
-    SYSnakeBodyPoint *newPoint = [[SYSnakeBodyPoint alloc]init];
+- (void)eat:(SYSnakeBodyPoint *)food{
+
+    /**
+     *  吃下食物
+     */
+    [self.body insertObject:food atIndex:0];
+}
+
+- (BOOL)die{
     SYSnakeBodyPoint *snakeHead = [self.body firstObject];
+    NSArray * snakeBody = [self.body subarrayWithRange:NSMakeRange(1, self.body.count - 1)];
+    if ([snakeBody containsObject:snakeHead]) {
+        return YES;
+    }
+    return NO;
+}
+
+- (SYSnakeBodyPoint *)head{
+    
+    return [self.body firstObject];
+}
+
+- (SYSnakeBodyPoint *)nextFood{
+    SYSnakeBodyPoint *newPoint = [[SYSnakeBodyPoint alloc]init];
+    SYSnakeBodyPoint *snakeHead = [self head];
     switch (self.direction) {
         case SnakeDirectionLeft:
         {
@@ -96,20 +91,11 @@
         default:
             break;
     }
-    /**
-     *  吃下食物
-     */
-    [self.body addObject:newPoint];
+    _nextPoint = snakeHead;
+    return snakeHead;
 }
 
-- (BOOL)die{
-    SYSnakeBodyPoint *snakeHead = [self.body firstObject];
-    NSArray * snakeBody = [self.body subarrayWithRange:NSMakeRange(1, self.body.count - 1)];
-    if ([snakeBody containsObject:snakeHead]) {
-        return YES;
-    }
-    return NO;
-}
+
 
 
 @end

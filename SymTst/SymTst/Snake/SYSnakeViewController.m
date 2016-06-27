@@ -7,7 +7,126 @@
 //
 
 #import "SYSnakeViewController.h"
+#import "SYSnake.h"
+#import "SnakeMapView.h"
+
+@interface SYSnakeViewController ()
+{
+    NSTimer *_timer;
+}
+@property (nonatomic, strong) NSMutableSet *points;
+
+@property (nonatomic, strong) SYSnake *snake;
+
+@property (nonatomic, strong) SnakeMapView *mapView;
+
+@property (nonatomic, strong) NSMutableArray *foods;
+
+@end
 
 @implementation SYSnakeViewController
+
+- (void)viewDidLoad{
+    [super viewDidLoad];
+    
+    self.mapView.frame = CGRectMake(0, 0, 320, 320);
+    self.mapView.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    [self.view addSubview:self.mapView];
+    
+    
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshMap) userInfo:nil repeats:YES];
+    
+}
+
+
+- (void)refreshMap{
+    //移动之前判断蛇前面有没有食物
+    if ([self array:self.foods ContainPoint:self.snake.nextPoint]) {
+        [self.snake eat:self.snake.nextPoint];
+        [self makeFood];
+    }
+    
+    //爬行一段距离
+    [self.snake forward];
+    
+    NSMutableArray * mapPoints = [NSMutableArray arrayWithArray:self.snake.body];
+    [mapPoints addObjectsFromArray:self.foods];
+    [self.mapView drawMap:mapPoints];
+}
+
+
+
+- (SYSnakeBodyPoint *)getMapPoint{
+    SYSnakeBodyPoint *point = [self.points anyObject];
+    if (point == nil) {
+        point = [[SYSnakeBodyPoint alloc]init];
+    }else{
+        [self.points removeObject:point];
+    }
+    return point;
+}
+
+- (SYSnake *)snake{
+    if (_snake == nil) {
+        _snake = [[SYSnake alloc]init];
+        _snake.direction = SnakeDirectionBottom;
+        //给蛇一个初始的身体
+        for (int i = 0; i<4; i++) {
+            SYSnakeBodyPoint *point =[[SYSnakeBodyPoint alloc]init];
+            point.x = 10;
+            point.y = i;
+            [_snake.body insertObject:point atIndex:0];
+        }
+    }
+    return _snake;
+}
+
+- (SnakeMapView *)mapView{
+    if (_mapView == nil) {
+        _mapView = [[SnakeMapView alloc]init];
+    }
+    return _mapView;
+}
+
+- (NSMutableSet *)points{
+    if (_points == nil) {
+        _points = [NSMutableSet setWithCapacity:0];
+    }
+    return _points;
+}
+
+- (NSMutableArray *)foods{
+    if (_foods == nil) {
+        _foods = [NSMutableArray arrayWithCapacity:0];
+        for (int i = 0; i<6; i++) {
+            
+            [_foods addObject:point];
+        }
+    }
+    return _foods;
+}
+
+- (void)makeFood{
+    SYSnakeBodyPoint *point = [self getMapPoint];
+    point.x = random()%self.mapView.coordinateMax;
+    point.y = random()%self.mapView.coordinateMax;
+    if (![self array:self.foods ContainPoint:point]) {
+        [self.foods addObject:point];
+    }else{
+        [self makeFood];
+    }
+}
+
+- (BOOL)array:(NSArray *)arr ContainPoint:(SYSnakeBodyPoint *)point{
+    BOOL isContain = NO;
+    for (SYSnakeBodyPoint * p in arr) {
+        if ([point isEqual:p]) {
+            isContain = YES;
+            break;
+        }
+    }
+    return isContain;
+}
 
 @end

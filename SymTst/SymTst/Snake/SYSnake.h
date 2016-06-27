@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class SYSnakeBodyPoint;
+
 typedef enum {
     SnakeDirectionTop,
     SnakeDirectionBottom,
@@ -30,9 +32,13 @@ typedef enum {
 
 @property (nonatomic, assign) SnakeDirection direction;
 
-- (void)forward:(SnakeDirection)direction;
+@property (nonatomic, strong, readonly) SYSnakeBodyPoint* head;
 
-- (void)eat;
+@property (nonatomic, strong, readonly) SYSnakeBodyPoint* nextPoint;
+
+- (void)forward;
+
+- (void)eat:(SYSnakeBodyPoint *)food;
 
 - (BOOL)die;
 

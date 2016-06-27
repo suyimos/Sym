@@ -12,6 +12,7 @@
 {
     
 }
+
 @property (nonatomic, strong) NSMutableSet *points;
 
 @end
@@ -21,11 +22,12 @@
 - (instancetype)init{
     if (self = [super init]) {
         self.mapType = MapType1;
+        self.backgroundColor = [UIColor grayColor];
     }
     return self;
 }
 - (void)createMap{
-    self.backgroundColor = [UIColor grayColor];
+    
     
 }
 
