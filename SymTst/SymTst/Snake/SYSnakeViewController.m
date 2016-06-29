@@ -48,7 +48,9 @@
     }
     
     //爬行一段距离
-    [self.snake forward];
+    if ([self.snake forward]) {
+        [_timer invalidate];
+    }
     
     NSMutableArray * mapPoints = [NSMutableArray arrayWithArray:self.snake.body];
     [mapPoints addObjectsFromArray:self.foods];
@@ -101,7 +103,7 @@
         _foods = [NSMutableArray arrayWithCapacity:0];
         for (int i = 0; i<6; i++) {
             
-            [_foods addObject:point];
+            [self makeFood];
         }
     }
     return _foods;

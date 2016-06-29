@@ -36,7 +36,7 @@ typedef enum {
 
 @property (nonatomic, strong, readonly) SYSnakeBodyPoint* nextPoint;
 
-- (void)forward;
+- (BOOL)forward;
 
 - (void)eat:(SYSnakeBodyPoint *)food;
 

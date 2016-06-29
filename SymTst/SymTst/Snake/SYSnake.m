@@ -17,9 +17,9 @@
     return self;
 }
 
-- (void)forward {
+- (BOOL)forward {
     SYSnakeBodyPoint *newPoint = [self nextFood];
-    SYSnakeBodyPoint *snakeHead = [self.body firstObject];
+//    SYSnakeBodyPoint *snakeHead = [self.body firstObject];
     
     
 
@@ -27,7 +27,7 @@
     /**
      *  前进了一个点
      */
-    [self.body addObject:newPoint];
+    [self.body insertObject:newPoint atIndex:0];
     /**
      *  移除最后一个点
      */
@@ -35,7 +35,7 @@
     /**
      *  判断是否死亡
      */
-    [self die];
+    return [self die];
 }
 - (void)eat:(SYSnakeBodyPoint *)food{
 
@@ -46,10 +46,12 @@
 }
 
 - (BOOL)die{
-    SYSnakeBodyPoint *snakeHead = [self.body firstObject];
+    SYSnakeBodyPoint *snakeHead = [self head];
     NSArray * snakeBody = [self.body subarrayWithRange:NSMakeRange(1, self.body.count - 1)];
-    if ([snakeBody containsObject:snakeHead]) {
-        return YES;
+    for (SYSnakeBodyPoint *body in snakeBody) {
+        if ([body isEqual:snakeHead]) {
+            return YES;
+        }
     }
     return NO;
 }
@@ -65,14 +67,14 @@
     switch (self.direction) {
         case SnakeDirectionLeft:
         {
-            newPoint.x = snakeHead.x;
-            newPoint.y = snakeHead.y - 1;
+            newPoint.x = snakeHead.x - 1;
+            newPoint.y = snakeHead.y;
         }
             break;
         case SnakeDirectionRight:
         {
-            newPoint.x = snakeHead.x;
-            newPoint.y = snakeHead.y - 1;
+            newPoint.x = snakeHead.x + 1;
+            newPoint.y = snakeHead.y;
         }
             break;
         case SnakeDirectionTop:
@@ -84,15 +86,15 @@
         case SnakeDirectionBottom:
         {
             newPoint.x = snakeHead.x;
-            newPoint.y = snakeHead.y - 1;
+            newPoint.y = snakeHead.y + 1;
         }
             break;
             
         default:
             break;
     }
-    _nextPoint = snakeHead;
-    return snakeHead;
+    _nextPoint = newPoint;
+    return newPoint;
 }
 
 
@@ -111,6 +113,8 @@
     }
 }
 
-
+- (NSString *)description{
+    return [NSString stringWithFormat:@"%ld====%ld",self.x,self.y];
+}
 
 @end

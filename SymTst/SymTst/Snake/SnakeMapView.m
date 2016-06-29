@@ -56,6 +56,7 @@
     UIView *point = [self.points anyObject];
     if (point == nil) {
         point = [[UIView alloc]init];
+        point.backgroundColor = [UIColor greenColor];
         point.bounds = CGRectMake(0, 0, self.mapType, self.mapType);
     }else{
         [self.points removeObject:point];
