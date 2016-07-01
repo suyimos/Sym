@@ -11,7 +11,7 @@
 @class SYSnakeBodyPoint;
 
 typedef enum {
-    SnakeDirectionTop,
+    SnakeDirectionTop = 1,
     SnakeDirectionBottom,
     SnakeDirectionLeft,
     SnakeDirectionRight,
@@ -27,6 +27,8 @@ typedef enum {
 @end
 
 @interface SYSnake : NSObject
+
+@property (nonatomic, assign) NSInteger boundary;
 
 @property (nonatomic, strong) NSMutableArray * body;
 

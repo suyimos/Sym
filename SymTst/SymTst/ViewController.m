@@ -20,7 +20,7 @@
     
     
     
-    NSLog(@"张树鹏疯了，而且疯的好厉害");
+    
     // Do any additional setup after loading the view, typically from a nib.
     NSLog(@"shishi ");
     // Do any additional setup after loading the view,  from a nib.

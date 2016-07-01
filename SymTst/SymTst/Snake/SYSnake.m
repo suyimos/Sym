@@ -13,6 +13,7 @@
 - (instancetype)init{
     if (self = [super init]) {
         self.body = [NSMutableArray arrayWithCapacity:0];
+        _direction = SnakeDirectionBottom;
     }
     return self;
 }
@@ -21,7 +22,12 @@
     SYSnakeBodyPoint *newPoint = [self nextFood];
 //    SYSnakeBodyPoint *snakeHead = [self.body firstObject];
     
-    
+    /**
+     *  判断是否超出边界  （暂时的处理是停住）
+     */
+    if (newPoint.x<0||newPoint.x>self.boundary||newPoint.y<0||newPoint.y>self.boundary) {
+        return NO;
+    }
 
 
     /**
@@ -98,7 +104,17 @@
 }
 
 
-
+- (void)setDirection:(SnakeDirection)direction{
+    if (_direction<3) {
+        if (direction>2) {
+            _direction = direction;
+        }
+    }else{
+        if (direction<3) {
+            _direction = direction;
+        }
+    }
+}
 
 @end
 

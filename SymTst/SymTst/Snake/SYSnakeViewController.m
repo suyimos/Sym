@@ -58,6 +58,19 @@
 }
 
 
+- (IBAction)control:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    if (button.tag == 0) {
+        
+        self.snake.direction = SnakeDirectionTop;
+    }else if(button.tag == 1){
+        self.snake.direction = SnakeDirectionLeft;
+    }else if(button.tag == 2){
+        self.snake.direction = SnakeDirectionBottom;
+    }else if(button.tag == 3){
+        self.snake.direction = SnakeDirectionRight;
+    }
+}
 
 - (SYSnakeBodyPoint *)getMapPoint{
     SYSnakeBodyPoint *point = [self.points anyObject];
@@ -72,6 +85,7 @@
 - (SYSnake *)snake{
     if (_snake == nil) {
         _snake = [[SYSnake alloc]init];
+        _snake.boundary = self.mapView.coordinateMax;
         _snake.direction = SnakeDirectionBottom;
         //给蛇一个初始的身体
         for (int i = 0; i<4; i++) {
