@@ -35,7 +35,7 @@
     
     
     
-    _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshMap) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(refreshMap) userInfo:nil repeats:YES];
     
 }
 
@@ -101,6 +101,7 @@
 - (SnakeMapView *)mapView{
     if (_mapView == nil) {
         _mapView = [[SnakeMapView alloc]init];
+        _mapView.mapType = MapType2;
     }
     return _mapView;
 }
@@ -134,14 +135,17 @@
     }
 }
 
-- (BOOL)array:(NSArray *)arr ContainPoint:(SYSnakeBodyPoint *)point{
+- (BOOL)array:(NSMutableArray *)arr ContainPoint:(SYSnakeBodyPoint *)point{
     BOOL isContain = NO;
+    SYSnakeBodyPoint *food;
     for (SYSnakeBodyPoint * p in arr) {
         if ([point isEqual:p]) {
             isContain = YES;
+            food = p;
             break;
         }
     }
+    [arr removeObject:food];
     return isContain;
 }
 
