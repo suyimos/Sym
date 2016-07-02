@@ -131,6 +131,7 @@
     if (![self array:self.foods ContainPoint:point]) {
         [self.foods addObject:point];
     }else{
+        
         [self makeFood];
     }
 }
